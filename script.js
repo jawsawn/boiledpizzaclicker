@@ -5,21 +5,21 @@ const canvas = document.getElementById('canvas');
         let isMouseDown = false;
         let spawnInterval;
 
-        canvas.addEventListener('mousedown', (event) => {
-            isMouseDown = true;
-            spawnBallAtMouse(event);
-            if (!spawnInterval) {
-                spawnInterval = setInterval(() => {
-                    spawnBallAtMouse(event);
-                }, 100); // Adjust spawn rate here (in milliseconds)
-            }
-        });
+        // canvas.addEventListener('mousedown', (event) => {
+        //     isMouseDown = true;
+        //     spawnBallAtMouse(event);
+        //     if (!spawnInterval) {
+        //         spawnInterval = setInterval(() => {
+        //             spawnBallAtMouse(event);
+        //         }, 100); // Adjust spawn rate here (in milliseconds)
+        //     }
+        // });
 
-        canvas.addEventListener('mouseup', () => {
-            isMouseDown = false;
-            clearInterval(spawnInterval);
-            spawnInterval = null;
-        });
+        // canvas.addEventListener('mouseup', () => {
+        //     isMouseDown = false;
+        //     clearInterval(spawnInterval);
+        //     spawnInterval = null;
+        // });
 
         canvas.addEventListener('click', (event) => {
             spawnBallAtMouse(event);
@@ -37,7 +37,7 @@ const canvas = document.getElementById('canvas');
                 x: x,
                 y: y,
                 radius: 20,
-                color: getRandomColor(),
+                color: "#000",
                 dx: Math.random() * 4 - 2,
                 dy: 2,
                 gravity: 0.8,
@@ -48,21 +48,23 @@ const canvas = document.getElementById('canvas');
             balls.push(ball);
         }
 
-        function getRandomColor() {
-            const letters = '0123456789ABCDEF';
-            let color = '#';
-            for (let i = 0; i < 6; i++) {
-                color += letters[Math.floor(Math.random() * 16)];
-            }
-            return color;
-        }
+        // function getRandomColor() {
+        //     const letters = '0123456789ABCDEF';
+        //     let color = '#';
+        //     for (let i = 0; i < 6; i++) {
+        //         color += letters[Math.floor(Math.random() * 16)];
+        //     }
+        //     return color;
+        // }
 
         function drawBall(ball) {
-            ctx.beginPath();
-            ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
-            ctx.fillStyle = ball.color;
-            ctx.fill();
-            ctx.closePath();
+            // ctx.beginPath();
+            // ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+            // ctx.fillStyle = ball.color;
+            // ctx.fill();
+            // ctx.closePath();
+            ctx.font = '40px sans-serif'; // Adjust size as needed
+            ctx.fillText('🍕', ball.x - 20, ball.y + 10); // Center the emoji
         }
 
         function updateBall(ball) {
