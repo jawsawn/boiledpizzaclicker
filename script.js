@@ -2,13 +2,35 @@ const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
 
         const balls = [];
+        let isMouseDown = false;
+        let spawnInterval;
+
+        canvas.addEventListener('mousedown', (event) => {
+            isMouseDown = true;
+            spawnBallAtMouse(event);
+            if (!spawnInterval) {
+                spawnInterval = setInterval(() => {
+                    spawnBallAtMouse(event);
+                }, 100); // Adjust spawn rate here (in milliseconds)
+            }
+        });
+
+        canvas.addEventListener('mouseup', () => {
+            isMouseDown = false;
+            clearInterval(spawnInterval);
+            spawnInterval = null;
+        });
 
         canvas.addEventListener('click', (event) => {
+            spawnBallAtMouse(event);
+        });
+
+        function spawnBallAtMouse(event) {
             const rect = canvas.getBoundingClientRect();
             const x = event.clientX - rect.left;
             const y = event.clientY - rect.top;
             addBall(x, y);
-        });
+        }
 
         function addBall(x, y) {
             const ball = {
@@ -18,10 +40,10 @@ const canvas = document.getElementById('canvas');
                 color: getRandomColor(),
                 dx: Math.random() * 4 - 2,
                 dy: 2,
-                gravity: 0.5,
+                gravity: 0.8,
                 bounceFactor: 0.5, // Lowered bounce factor
-                friction: 0.99,
-                dampening: 0.99 // New property for velocity dampening
+                friction: 0.8,
+                dampening: 0.8 // New property for velocity dampening
             };
             balls.push(ball);
         }
