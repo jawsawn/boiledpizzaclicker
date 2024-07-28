@@ -26,9 +26,9 @@ const canvas = document.getElementById('canvas');
         });
 
         function spawnBallAtMouse(event) {
-            const rect = canvas.getBoundingClientRect();
-            const x = event.clientX - rect.left;
-            const y = event.clientY - rect.top;
+            //const rect = canvas.getBoundingClientRect();
+            const x = event.clientX*(600 / canvas.clientWidth) - canvas.offsetLeft;
+            const y = event.clientY - canvas.offsetTop;
             addBall(x, y);
         }
 
@@ -64,7 +64,7 @@ const canvas = document.getElementById('canvas');
             // ctx.fill();
             // ctx.closePath();
             ctx.font = '40px sans-serif'; // Adjust size as needed
-            ctx.fillText('🍕', ball.x - 20, ball.y + 10); // Center the emoji
+            ctx.fillText('🍕', ball.x-20, ball.y+10); // Center the emoji
         }
 
         function updateBall(ball) {
